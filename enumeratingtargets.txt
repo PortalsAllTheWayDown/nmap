@@ -1,0 +1,8 @@
+To scan a range you can use 10.11.12.15-20 which will scan 6 ip addresses.
+You can also use MACHINE_IP/30 to scan a range.
+You can also provide a file as input for your list of targets, nmap -iL list_of_hosts.txt
+
+If you wanted to check the lists of hosts nmap was going to scan without scanning them you can run nmap -sL targets
+
+The domain name could provide us more info but  if you dont want nmap going to the DNS server you can use -n to not use DNS.
+
