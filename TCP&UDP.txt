@@ -1,0 +1,41 @@
+TCP SYN Ping
+-PS is the option used
+
+We can send a packet with SYN (Synchronize) flag set to a TCP port, 80 by default and wait for a response.
+An open port should reply with a SYN/ACK (Acknowledge); a closed port would result in an RST (Reset).
+
+To use nmap to use tcp syn ping use option -PS followed by the port number, range, list, or combination of them.
+
+For example -PS21 will target port 21. While -PS21-25 will scan ports 21-25
+-PS80,443,8080 will scan those three ports.
+
+
+privileged users can send TCP SYN packets and dont need to complte the TCP 3 way handshake even if the port is open.
+unprivileged users have no choice but to complete the 3 way handshake if the port is open.
+
+nmap -PS -sn MACHINE_IP/24 to scan the subnet.
+When running on your same subnet your machine is on it will just run arp requests again asking for those ips.
+When running against another subnet it will send the tcp syns out
+
+TCP ACK Ping
+-PA is the option used
+
+Must be in privileged user mode to be able to use this, in unprivileged nmap will attempt a 3 way handshake
+
+By default port 80 is used. The syntax is similar to TCP SYN ping -PA should be followed by a port number, range, list or a combination of them.
+
+example: sudo nmap -PA -sn 10.10.68.220/24
+
+The responding computer will respond with a RST flag because the TCP packet with the ACK isnot part of any ongoing connection.
+
+_________________________________________________________
+
+UDP Ping
+-PU is the option used
+
+Contrary to TCP SYN ping, sending a UDP packet to an open port is not expected to lead to any reply. However if we send a UDP packet to a closed UDP port, we expect to get an ICMP port unreachable packet; this indicates that the target system is up and available.
+
+The ICMP is Type 3, Code 3 this indicates "Destination Port Unreachable"
+
+sudo nmap -PU -sn 10.10.68.220/24
+

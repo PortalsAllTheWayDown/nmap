@@ -1,0 +1,25 @@
+Ping = ICMP type8/ECHO requests with a ping reply ICMP Type 0
+
+Many firewalls block ICMP echo; new versions of MS Windows are configured with a host firewall that blocks ICMP echo requests by default.
+
+ARP query will come before the ICMP request if your target is on the same subnet.
+
+To use ICMP echo request to discover live hosts, add te option -PE and remember to add -sn if you dont want to follow that with a port scan.
+
+example use: sudo nmap -PE -sn MACHINE_IP/24
+
+It will return the hosts on the subnet that your on and also their MAC addresses if the ARP request receive responses.
+
+If you run the sudo nmap -PE -sn 10.10.68.220/24 as this is on a different subnet it will send out the ICMP pings.
+
+In wireshark if you filter for icmp you should see the pings.
+
+Because ICMP echo requests tend to be blocked you might also conside ICMP timestamp or icmp address mask requests to tell if a system is online. Nmap uses timestamp request (ICMP Type 13) and checks whether it will get a timestamp reply(ICMP type 14). Adding the -PP option tells Nmap to use ICMP timestamp requests.
+
+nmap -PP -sn MACHINE_IP/24
+Again if on wireshark you dont see the icmp traffic its because your ARP on your subnet came back with replies probably.
+
+Its good to know multiple different types of ICMP because a firewall could block both of the previous types.
+
+so lets run ICMP address mask queries, we run the command nmap -PM -sn MACHINE_IP/24
+

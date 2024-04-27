@@ -15,3 +15,5 @@ to discover all hosts on your subnet: nmap -PR -sn MACHINE_IP/24
 This will run it on the range.
 
 There is a scanner built aroudn ARP queries: arp-scan it provides many options to customize your scan.
+apt install arp-scan
+
