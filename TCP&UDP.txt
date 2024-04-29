@@ -39,3 +39,6 @@ The ICMP is Type 3, Code 3 this indicates "Destination Port Unreachable"
 
 sudo nmap -PU -sn 10.10.68.220/24
 
+In the same sense that an IP address specifies a host on a network among many others, a TCP port or UDP port is used to identify a network servce running on that host.
+A server provides the network service and it adheres to a specific network protool. Examples include providing time, responding to DNS queries, and serving web pages.
+A port is usually linked to a service using that specific port number.
